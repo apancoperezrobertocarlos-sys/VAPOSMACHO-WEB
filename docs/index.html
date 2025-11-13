@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAPOSMACHO - Vapes Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --accent: #ff6b35;
+            --text: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-slogan {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e55a2b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .fallback-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            display: none;
+        }
+
+        .product-img:has(img[src=""]) .fallback-icon,
+        .product-img:not(:has(img[src])) .fallback-icon {
+            display: flex;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .product-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Infographic Section */
+        .infographic {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .infographic-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .infographic-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .infographic-text {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Promotions */
+        .promotions {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .promo-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .promo-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <!-- Logo -->
+                <img src="https://i.ibb.co/1WRQ7x7/Logo.png" 
+                     alt="VAPOSMACHO" class="logo-img">
+                <div>
+                    <div class="logo-text">VAPOSMACHO</div>
+                    <div class="logo-slogan">Calidad que se siente</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#promociones">Promociones</a></li>
+                    <li><a href="#infografia">Infografía</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>VAPOSMACHO</h1>
+            <p>Descubre la experiencia premium en vaping. Calidad, sabor y diseño en cada producto.</p>
+            <a href="#productos" class="btn">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="container" id="productos">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="products">
+            <!-- Product 1 - Vape Desechable Turbo -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/dJKYmh7r/Vape-Desechable-Turbo.webp" 
+                         alt="Vape Desechable Turbo">
+                    <div class="fallback-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Vape Desechable Turbo</h3>
+                    <div class="product-price">$299</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> 5000 puff</li>
+                        <li><i class="fas fa-battery-full"></i> Batería 500mAh</li>
+                        <li><i class="fas fa-wind"></i> 15 sabores disponibles</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 2 - Kit Inicio Pro -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/4nzXB9CK/Incluye-2-resistencias.jpg" 
+                         alt="Kit Inicio Pro">
+                    <div class="fallback-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Kit Inicio Pro</h3>
+                    <div class="product-price">$599</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Incluye 2 resistencias</li>
+                        <li><i class="fas fa-tint"></i> Tanque 4ml</li>
+                        <li><i class="fas fa-charging-station"></i> Carga USB-C</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 3 - Pod Recargable -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/ZpRYvT2M/Pod-Recargable.jpg" 
+                         alt="Pod Recargable">
+                    <div class="fallback-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pod Recargable</h3>
+                    <div class="product-price">$449</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Batería 800mAh</li>
+                        <li><i class="fas fa-refresh"></i> Recargable</li>
+                        <li><i class="fas fa-palette"></i> 5 colores disponibles</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 4 - Líquidos Premium -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/PZ24jFRZ/L-quidos-Premium.jpg" 
+                         alt="Líquidos Premium">
+                    <div class="fallback-icon">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Líquidos Premium</h3>
+                    <div class="product-price">$149</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> 30ml por botella</li>
+                        <li><i class="fas fa-star"></i> +20 sabores únicos</li>
+                        <li><i class="fas fa-award"></i> Calidad premium</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 5 - Vape Mod Avanzado -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/jvrmP8SK/Vape-Mod-Avanzado.jpg" 
+                         alt="Vape Mod Avanzado">
+                    <div class="fallback-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Vape Mod Avanzado</h3>
+                    <div class="product-price">$899</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Pantalla OLED</li>
+                        <li><i class="fas fa-bolt"></i> 200W máximo</li>
+                        <li><i class="fas fa-cogs"></i> Ajustes personalizables</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 6 - Resistencias Pack -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/23dkLtZS/Resistencias-Pack.png" 
+                         alt="Resistencias Pack">
+                    <div class="fallback-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Resistencias Pack</h3>
+                    <div class="product-price">$199</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Pack de 5 unidades</li>
+                        <li><i class="fas fa-bolt"></i> Diferentes ohmios</li>
+                        <li><i class="fas fa-shield-alt"></i> Calidad garantizada</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 7 - Accesorios Completos -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/XkrXghrt/Accesorios-Completos.jpg" 
+                         alt="Accesorios Completos">
+                    <div class="fallback-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Accesorios Completos</h3>
+                    <div class="product-price">$349</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Cargador + Estuche</li>
+                        <li><i class="fas fa-toolbox"></i> Herramientas incluidas</li>
+                        <li><i class="fas fa-gift"></i> Ideal para regalo</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+
+            <!-- Product 8 - Vape Mini Portátil -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://i.ibb.co/q3Hg9c7L/Vape-Mini-Port-til.jpg" 
+                         alt="Vape Mini Portátil">
+                    <div class="fallback-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Vape Mini Portátil</h3>
+                    <div class="product-price">$379</div>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> Diseño compacto</li>
+                        <li><i class="fas fa-bolt"></i> Carga rápida</li>
+                        <li><i class="fas fa-briefcase"></i> Perfecto para viajar</li>
+                    </ul>
+                    <a href="#contacto" class="btn">Consultar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="promotions" id="promociones">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Promociones Especiales</h2>
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <h3>2x1 en Líquidos</h3>
+                    <p>Lleva 2 botellas de líquido premium y paga solo 1. Válido hasta agotar existencias.</p>
+                </div>
+                <div class="promo-card">
+                    <h3>Kit Inicio + Regalo</h3>
+                    <p>Al comprar cualquier kit de inicio, lleva un líquido de regalo de 30ml.</p>
+                </div>
+                <div class="promo-card">
+                    <h3>Envío Gratis</h3>
+                    <p>En compras mayores a $700, envío gratis por toda Puebla.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infographic Section -->
+    <section class="infographic" id="infografia">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Perfil de Nuestro Cliente</h2>
+            <div class="infographic-content">
+                <img src="https://i.ibb.co/Hf3n2whh/Perfil-de-cliente-potencial.png" 
+                     alt="Perfil de Cliente Potencial" class="infographic-img">
+                <div class="infographic-text">
+                    <p>Conoce a nuestro cliente ideal: personas que buscan calidad, estilo y la mejor experiencia en vaping.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact container" id="contacto">
+        <h2 class="section-title">Contáctanos</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4>Teléfono</h4>
+                        <p>221 110 3443</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>apancoperezrobertocarlos@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Zona de Envíos</h4>
+                        <p>Toda Puebla - Lunes a Viernes</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div>
+                        <h4>Métodos de Pago</h4>
+                        <p>Tarjeta de crédito/débito</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un Mensaje</h3>
+                <form>
+                    <input type="text" placeholder="Tu nombre" required>
+                    <input type="email" placeholder="Tu email" required>
+                    <input type="tel" placeholder="Tu teléfono">
+                    <textarea placeholder="Tu mensaje" required></textarea>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="https://i.ibb.co/1WRQ7x7/Logo.png" 
+                         alt="VAPOSMACHO" class="logo-img" style="height: 40px; margin-bottom: 1rem;">
+                    <p>Tu destino premium para vaping en Puebla. Calidad y servicio excepcional.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#promociones">Promociones</a></li>
+                        <li><a href="#infografia">Infografía</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <p>Venta exclusiva para mayores de 18 años. El consumo de estos productos puede ser perjudicial para la salud.</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 VAPOSMACHO. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Mensaje enviado! Te contactaremos pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
